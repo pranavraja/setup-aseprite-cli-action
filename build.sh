@@ -5,10 +5,9 @@ if [ -f "$PWD/build/bin/aseprite" ]; then
   exit 0
 fi
 
-cd clone
-git checkout temp
+git checkout v1.3-rc2
 
-git submodule update --init --recursive --depth 1 submodules/aseprite/aseprite
+git submodule update --init --recursive --depth 1
 cd ..
 
 if [ "$(uname)" == "Darwin" ]; then
@@ -21,7 +20,7 @@ else
 fi
 
 cmake -E make_directory build
-cmake -E chdir build cmake -G Ninja -DENABLE_UI=OFF ../clone/submodules/aseprite/aseprite
+cmake -E chdir build cmake -G Ninja -DENABLE_UI=OFF ../
 cd build
 
 if [ "$(uname)" == "Darwin" ]; then
