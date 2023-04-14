@@ -9,18 +9,18 @@ runs:
   - id: prepare
     run: bash ./prepare.sh
     env:
-      NEOMURA_SETUP_ASEPRITE_CLI_ACTION_REPOSITORY: ${{ GITHUB.ACTION_REPOSITORY }}
-      NEOMURA_SETUP_ASEPRITE_CLI_ACTION_REF: ${{ GITHUB.ACTION_REF }}
+      NEOMURA_SETUP_ASEPRITE_CLI_ACTION_REPOSITORY: ${{ github.action_repository }}
+      NEOMURA_SETUP_ASEPRITE_CLI_ACTION_REF: ${{ github.action_ref }}
     shell: bash
-    working-directory: ${{ GITHUB.ACTION_PATH }}
+    working-directory: ${{ github.action_path }}
   - id: cache
     uses: actions/cache@v3
     with:
-      path: ${{ GITHUB.ACTION_PATH }}/build/bin
-      key: neomura-setup-aseprite-cli-action-${{ GITHUB.REPOSITORY }}-${{ GITHUB.REF }}-${{ runner.os }}-${{ steps.prepare.outputs.sha }}
+      path: ${{ github.action_path }}/build/bin
+      key: neomura-setup-aseprite-cli-action-${{ github.repository }}-${{ github.ref }}-${{ runner.os }}-${{ steps.prepare.outputs.sha }}
   - run: ./build.sh
     shell: bash
-    working-directory: ${{ GITHUB.ACTION_PATH }}
+    working-directory: ${{ github.action_path }}
   - run: ./install.sh
     shell: bash
-    working-directory: ${{ GITHUB.ACTION_PATH }}
+    working-directory: ${{ github.action_path }}
